@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import my.pinkyo.demo.model.User;
 
 @RestController
-@RequestMapping("test")
+@RequestMapping("/test")
 public class TestController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public User getById(@PathVariable String name) {
 		return userService.getByName(name);
