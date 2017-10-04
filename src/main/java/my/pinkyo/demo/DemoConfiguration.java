@@ -18,15 +18,6 @@ public class DemoConfiguration {
     @Autowired DataSource dataSource;
 
     @Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("schema.sql")
-                .build();
-    }
-
-    @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource);
     }
