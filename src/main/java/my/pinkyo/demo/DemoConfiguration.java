@@ -39,5 +39,4 @@ public class DemoConfiguration {
                 50, 200, 15, TimeUnit.MINUTES));
         return factory;
     }
-
 }
