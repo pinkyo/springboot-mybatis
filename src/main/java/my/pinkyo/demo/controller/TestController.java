@@ -26,7 +26,13 @@ public class TestController {
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void saveUser(@RequestBody User user) {
-		userService.saveUser(user);
+	public User saveUser(@RequestBody User user) {
+		return userService.saveUser(user);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void updateUser(@RequestBody User user) {
+		userService.updateUser(user);
 	}
 }

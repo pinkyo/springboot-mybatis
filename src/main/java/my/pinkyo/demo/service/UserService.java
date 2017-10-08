@@ -12,19 +12,27 @@ public class UserService {
 	private UserMapper userMapper;
 
 	@Transactional
-	public boolean saveUser(User user) {
+	public User saveUser(User user) {
 		User result = userMapper.getUserByName(user.getName());
-
 		if (result == null) {
 			userMapper.saveUser(user);
-			return true;
+		} else {
+			throw new RuntimeException("user have existed.");
 		}
-
-		return false;
+		return userMapper.getUserByName(user.getName());
 	}
 	
 	public User getByName(String name) {
 		User user = userMapper.getUserByName(name);
 		return user;
+	}
+
+	public void updateUser(User user) {
+		User result = userMapper.getUserByName(user.getName());
+		if (result == null) {
+			throw new RuntimeException("user doesn't exist.");
+		}
+
+		userMapper.updateUser(user);
 	}
 }

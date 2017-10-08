@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import my.pinkyo.demo.model.User;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -13,4 +14,7 @@ public interface UserMapper {
 	
 	@Insert("INSERT INTO user(name, sex) VALUES(#{name}, #{sex})")
 	void saveUser(User user);
+
+	@Update("UPDATE user SET name=#{name}, sex=#{sex} where name=#{name}")
+	void updateUser(User user);
 }
