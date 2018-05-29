@@ -3,18 +3,18 @@ package my.pinkyo.demo.controller;
 import my.pinkyo.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import my.pinkyo.demo.model.User;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
+	private static final String DEFAULT_START_INDEX = "0";
+	private static final String DEFAULT_PAGE_SIZE = "10";
+
 	@Autowired
 	private UserService userService;
 	
@@ -23,7 +23,15 @@ public class TestController {
 	public User getById(@PathVariable String name) {
 		return userService.getByName(name);
 	}
-	
+
+	@RequestMapping("")
+	@ResponseStatus(HttpStatus.OK)
+	public List<User> getByPage(
+			@RequestParam(value = "startIndex", required = false, defaultValue = DEFAULT_START_INDEX) int startIndex,
+			@RequestParam(value = "pageSize", required = false, defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
+		return userService.getByPage(startIndex, pageSize);
+	}
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public User saveUser(@RequestBody User user) {

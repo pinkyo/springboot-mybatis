@@ -1,5 +1,8 @@
 package my.pinkyo.demo;
 
+import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.eclipse.jetty.util.thread.ExecutorThreadPool;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -19,6 +22,10 @@ import java.util.concurrent.TimeUnit;
 public class DemoConfiguration {
     @Autowired DataSource dataSource;
 
+    static {
+        LogFactory.useLog4JLogging();
+    }
+
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource);
@@ -28,6 +35,7 @@ public class DemoConfiguration {
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
+        sessionFactory.setPlugins(new Interceptor[]{new PageHelper()}); // set Pagination support.
         return sessionFactory.getObject();
     }
 

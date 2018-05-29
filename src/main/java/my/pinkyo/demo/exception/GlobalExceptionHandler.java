@@ -13,6 +13,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public String handleExceptin(Exception ex) {
-        return ex.getMessage();
+        return HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
     }
 }
