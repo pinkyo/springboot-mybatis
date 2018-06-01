@@ -21,6 +21,7 @@ public class UserSqlProvider {
     public String saveUser() {
         return new SQL(){{
             INSERT_INTO("user");
+            VALUES("id", "#{user.id, typeHandler=my.pinkyo.demo.typehandler.UUIDTypeHandler}");
             VALUES("name", "#{user.name}");
             VALUES("sex", "#{user.sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler}");
         }}.toString();

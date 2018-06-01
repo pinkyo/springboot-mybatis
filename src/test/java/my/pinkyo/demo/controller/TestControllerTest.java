@@ -33,7 +33,7 @@ public class TestControllerTest {
     }
 
     @Test
-    public void testGetById() {
+    public void testGetByName() {
         User user = restTemplate.getForObject(baseUrl + "/{name}", User.class, userName);
         assertNotNull(user);
     }

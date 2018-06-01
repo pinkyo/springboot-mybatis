@@ -1,8 +1,11 @@
 package my.pinkyo.demo.controller;
 
 import my.pinkyo.demo.service.UserService;
+import my.pinkyo.demo.valiation.Insert;
+import my.pinkyo.demo.valiation.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import my.pinkyo.demo.model.User;
@@ -20,7 +23,7 @@ public class TestController {
 	
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public User getById(@PathVariable String name) {
+	public User getByName(@PathVariable String name) {
 		return userService.getByName(name);
 	}
 
@@ -34,13 +37,13 @@ public class TestController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public User saveUser(@RequestBody User user) {
+	public User saveUser(@Validated({Insert.class}) @RequestBody User user) {
 		return userService.saveUser(user);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateUser(@RequestBody User user) {
+	public void updateUser(@Validated({Update.class}) @RequestBody User user) {
 		userService.updateUser(user);
 	}
 }

@@ -1,14 +1,17 @@
 package my.pinkyo.demo.mapper;
 
 import my.pinkyo.demo.provider.UserSqlProvider;
+import my.pinkyo.demo.typehandler.UUIDTypeHandler;
 import org.apache.ibatis.annotations.*;
 
 import my.pinkyo.demo.model.User;
 
 import java.util.List;
+import java.util.UUID;
 
 @Mapper
 public interface UserMapper {
+    @ResultType(User.class)
 	@SelectProvider(type = UserSqlProvider.class, method = "getUserByName")
 	User getUserByName(@Param("name") String name);
 

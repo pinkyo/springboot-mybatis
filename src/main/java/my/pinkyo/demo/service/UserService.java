@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -18,6 +19,7 @@ public class UserService {
 	public User saveUser(User user) {
 		User result = userMapper.getUserByName(user.getName());
 		if (result == null) {
+			user.setId(UUID.randomUUID());
 			userMapper.saveUser(user);
 		} else {
 			throw new RuntimeException("user have existed.");
