@@ -22,7 +22,7 @@ public class UserSqlProvider {
         return new SQL(){{
             INSERT_INTO("user");
             VALUES("name", "#{user.name}");
-            VALUES("sex", "#{user.sex}");
+            VALUES("sex", "#{user.sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler}");
         }}.toString();
     }
 
