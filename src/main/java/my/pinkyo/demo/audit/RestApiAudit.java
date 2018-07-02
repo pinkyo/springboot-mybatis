@@ -9,5 +9,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface RestApiAudit {
-    String value() default "UNKNOWN";
+    AuditActionType value() default AuditActionType.UNKNOWN;
 }

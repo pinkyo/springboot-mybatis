@@ -1,5 +1,6 @@
 package my.pinkyo.demo.controller;
 
+import my.pinkyo.demo.audit.AuditActionType;
 import my.pinkyo.demo.audit.RestApiAudit;
 import my.pinkyo.demo.service.UserService;
 import my.pinkyo.demo.valiation.Insert;
@@ -36,14 +37,14 @@ public class TestController {
 		return userService.getByPage(startIndex, pageSize);
 	}
 
-	@RestApiAudit("SAVE")
+	@RestApiAudit(AuditActionType.SAVE)
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public User saveUser(@Validated({Insert.class}) @RequestBody User user) {
 		return userService.saveUser(user);
 	}
 
-	@RestApiAudit("UPDATE")
+	@RestApiAudit(AuditActionType.UPDATE)
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateUser(@Validated({Update.class}) @RequestBody User user) {
