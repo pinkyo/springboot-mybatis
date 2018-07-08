@@ -19,7 +19,7 @@ import java.util.List;
 public class TestController {
 	private static final String DEFAULT_START_INDEX = "0";
 	private static final String DEFAULT_PAGE_SIZE = "10";
-
+	private static final String TEST_INFO = "Test";
 	@Autowired
 	private UserService userService;
 	
@@ -49,5 +49,12 @@ public class TestController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateUser(@Validated({Update.class}) @RequestBody User user) {
 		userService.updateUser(user);
+	}
+
+	@RestApiAudit(AuditActionType.INFO)
+	@RequestMapping(value = "/info")
+	@ResponseStatus(HttpStatus.OK)
+	public String getInfo() {
+		return TEST_INFO;
 	}
 }
