@@ -1,5 +1,5 @@
 package my.pinkyo.demo.audit;
 
 public enum AuditActionType {
-    UNKNOWN, SAVE, UPDATE
+    UNKNOWN, SAVE, UPDATE, INFO
 }
