@@ -1,5 +1,6 @@
 package my.pinkyo.demo.model;
 
+import my.pinkyo.demo.valiation.AlphaDigitOnly;
 import my.pinkyo.demo.valiation.Insert;
 import my.pinkyo.demo.valiation.Update;
 
@@ -15,7 +16,9 @@ import java.util.UUID;
 public class User {
 	@Null(groups = {Update.class, Insert.class})
 	private UUID id;
+	@AlphaDigitOnly(groups = {Update.class, Insert.class})
 	private String name;
+	@NotNull(groups = {Update.class, Insert.class})
 	private Sex sex;
 
 	public UUID getId() {

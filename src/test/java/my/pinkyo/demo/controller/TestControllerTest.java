@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = App.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TestControllerTest {
+public class  TestControllerTest {
     @Autowired
     TestRestTemplate restTemplate;
 

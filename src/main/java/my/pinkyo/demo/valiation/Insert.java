@@ -1,4 +1,4 @@
 package my.pinkyo.demo.valiation;
 
-public @interface Insert {
+public interface Insert {
 }

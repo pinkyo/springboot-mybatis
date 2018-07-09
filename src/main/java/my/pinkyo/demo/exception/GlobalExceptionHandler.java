@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ValidationException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -15,5 +17,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public String handleExceptin(Exception ex) {
         return HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleValidationException(ValidationException ve) {
     }
 }
