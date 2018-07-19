@@ -21,6 +21,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleValidationException(ValidationException ve) {
+    public String handleValidationException(ValidationException ve) {
+        return HttpStatus.BAD_REQUEST.getReasonPhrase();
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleNotFoundException(BadRequestException bre) {
+        return HttpStatus.NOT_FOUND.getReasonPhrase();
     }
 }
