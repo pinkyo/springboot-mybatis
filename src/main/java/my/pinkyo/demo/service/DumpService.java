@@ -1,4 +1,4 @@
 package my.pinkyo.demo.service;
 
-public class UserService {
+public interface DumpService {
 }
