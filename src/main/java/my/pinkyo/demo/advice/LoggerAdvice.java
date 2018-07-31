@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class LoggerAdvice {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggerAdvice.class);
 
-    @Around("execution(public * my.pinkyo..*.*(..))")
+    @Around("execution(public * my.pinkyo.demo.controller..*.*(..))")
     public Object logMethodInvocation(ProceedingJoinPoint pjp) throws Throwable {
         try {
             Object[] args = pjp.getArgs();
