@@ -4,8 +4,9 @@ jdk:
   - oraclejdk8
 services:
   - docker
-script:
-  - mvn package
+install:
+  - mvn package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: skip
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
   - cd target/
