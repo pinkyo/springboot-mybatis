@@ -1,5 +1,11 @@
+sudo: required
 language: java
 jdk:
   - oraclejdk8
+services:
+  - docker
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
+  - cd target/ && docker build -t hub.tencentyun.com/kkg/springboot-mybatis-demo .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin hub.tencentyun.com
+  - docker push hub.tencentyun.com
