@@ -12,4 +12,4 @@ after_success:
   - ls -a
   - docker build -t hub.tencentyun.com/kkg/springboot-mybatis-demo .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin hub.tencentyun.com
-  - docker push hub.tencentyun.com
+  - docker push hub.tencentyun.com/kkg/springboot-mybatis-demo
