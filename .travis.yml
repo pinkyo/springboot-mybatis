@@ -11,6 +11,6 @@ after_success:
   - cd target/
   - cp /home/travis/.m2/repository/myth/yinkn/springboot-mybatis-demo/0.0.1-SNAPSHOT/springboot-mybatis-demo-0.0.1-SNAPSHOT.jar .
   - ls -a
-  - docker build -t hub.tencentyun.com/kkg/springboot-mybatis-demo .
+  - docker build -t hub.tencentyun.com/kkg/springboot-mybatis-demo:0.0.1 .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin hub.tencentyun.com
-  - docker push hub.tencentyun.com/kkg/springboot-mybatis-demo
+  - docker push hub.tencentyun.com/kkg/springboot-mybatis-demo:0.0.1
