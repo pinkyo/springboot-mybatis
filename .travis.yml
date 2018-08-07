@@ -9,6 +9,7 @@ install:
 script: skip
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
+  - pwd
   - cd target/
   - ls -a
   - docker build -t hub.tencentyun.com/kkg/springboot-mybatis-demo .
