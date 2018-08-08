@@ -1,0 +1,58 @@
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: springboot-mybatis-demo
+  namespace: 'default'
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      qcloud-app: springboot-mybatis-demo
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        qcloud-app: springboot-mybatis-demo
+    spec:
+      containers:
+      - image: hub.tencentyun.com/kkg/springboot-mybatis-demo:0.0.1
+        imagePullPolicy: Always
+        name: springboot-mybatis-demo
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        securityContext:
+          privileged: false
+      serviceAccountName: ""
+      volumes: null
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: springboot-mybatis-demo
+  namespace: 'default'
+spec:
+  ports:
+  - name: tcp-8088-8088-yygcs
+    nodePort: 0
+    port: 8088
+    protocol: TCP
+    targetPort: 8088
+  selector:
+    qcloud-app: springboot-mybatis-demo
+  type: LoadBalancer
+status:
+  loadBalancer: {}
