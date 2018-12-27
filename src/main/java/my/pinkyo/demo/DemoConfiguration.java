@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @Configuration

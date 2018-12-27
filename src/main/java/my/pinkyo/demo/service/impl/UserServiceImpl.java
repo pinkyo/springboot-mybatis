@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService, DumpService<User> {
 			user.setId(UUID.randomUUID());
 			userMapper.saveUser(user);
 		} else {
-			throw new RuntimeException("user have existed.");
+			throw new BadRequestException("user have existed.");
 		}
 		return user;
 	}

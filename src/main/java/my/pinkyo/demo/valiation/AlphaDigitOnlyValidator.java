@@ -12,10 +12,6 @@ public class AlphaDigitOnlyValidator implements ConstraintValidator<AlphaDigitOn
 
     @Override
     public boolean isValid(CharSequence value, ConstraintValidatorContext context) {
-        if (Objects.nonNull(value)
-            && !value.toString().matches("[a-zA-Z0-9]*")) {
-            return false;
-        }
-        return true;
+        return Objects.isNull(value) || value.toString().matches("[a-zA-Z0-9]*");
     }
 }

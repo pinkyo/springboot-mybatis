@@ -2,16 +2,14 @@ package my.pinkyo.demo.controller;
 
 import my.pinkyo.demo.audit.AuditActionType;
 import my.pinkyo.demo.audit.RestApiAudit;
+import my.pinkyo.demo.model.User;
 import my.pinkyo.demo.service.UserService;
-import my.pinkyo.demo.service.impl.UserServiceImpl;
 import my.pinkyo.demo.valiation.Insert;
 import my.pinkyo.demo.valiation.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import my.pinkyo.demo.model.User;
 
 import java.util.List;
 
@@ -24,13 +22,13 @@ public class TestController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	@GetMapping(value = "/{name}")
 	@ResponseStatus(HttpStatus.OK)
 	public User getByName(@PathVariable String name) {
 		return userService.getByName(name);
 	}
 
-	@RequestMapping("")
+	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public List<User> getByPage(
 			@RequestParam(value = "startIndex", required = false, defaultValue = DEFAULT_START_INDEX) int startIndex,
@@ -39,21 +37,21 @@ public class TestController {
 	}
 
 	@RestApiAudit(AuditActionType.SAVE)
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public User saveUser(@Validated({Insert.class}) @RequestBody User user) {
 		return userService.saveUser(user);
 	}
 
 	@RestApiAudit(AuditActionType.UPDATE)
-	@RequestMapping(method = RequestMethod.PUT)
+	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateUser(@Validated({Update.class}) @RequestBody User user) {
 		userService.updateUser(user);
 	}
 
 	@RestApiAudit(AuditActionType.INFO)
-	@RequestMapping(value = "/info")
+	@GetMapping(value = "/info")
 	@ResponseStatus(HttpStatus.OK)
 	public String getInfo() {
 		return TEST_INFO;

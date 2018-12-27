@@ -29,13 +29,13 @@ public class DataDumpController {
 
     }
 
-    @RequestMapping(value = "/category", method = RequestMethod.GET)
+    @GetMapping(value = "/category")
     @ResponseStatus(HttpStatus.OK)
     public List<DataCategory> getDataCategories() {
         return Arrays.asList(DataCategory.USER);
     }
 
-    @RequestMapping(value = "/dump/{category}", method = RequestMethod.GET)
+    @GetMapping(value = "/dump/{category}")
     @ResponseStatus(HttpStatus.OK)
     public List getData(@PathVariable DataCategory category) {
         return dumpServiceMap.get(category).dump();
