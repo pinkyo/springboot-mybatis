@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my.pinkyo.demo.mapper.UserMapper">
+    <resultMap id="userMap" type="my.pinkyo.demo.model.User">
+        <result column="id" property="id" typeHandler="my.pinkyo.demo.typehandler.UUIDTypeHandler"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+    </resultMap>
+
+    <select id="getUserByName" resultMap="userMap">
+        SELECT `id`, `name`, `sex`
+        FROM `user`
+        WHERE `name`=#{name};
+    </select>
+
+    <select id="getUsers" resultMap="userMap">
+        SELECT `id`, `name`, `sex`
+        FROM `user`;
+    </select>
+
+    <insert id="saveUser">
+        INSERT_INTO `user`(`id`, `name`, `sex`)
+        VALUES(
+        #{user.id, typeHandler=my.pinkyo.demo.typehandler.UUIDTypeHandler},
+        #{user.name},
+        #{user.sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler});
+    </insert>
+
+    <update id="updateUser">
+        UPDATE `user`
+        SET
+        `name`=#{user.name},
+        `sex`=#{user.sex},
+        WHERE `name`=#{user.name};
+    </update>
+</mapper>

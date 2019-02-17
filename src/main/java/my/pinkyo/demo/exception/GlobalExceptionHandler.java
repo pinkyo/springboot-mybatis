@@ -10,11 +10,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.validation.ValidationException;
 
 @ControllerAdvice
+@ResponseBody
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ResponseBody
     public String handleExceptin(Exception ex) {
         return HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
     }
@@ -26,8 +26,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleNotFoundException(BadRequestException bre) {
-        return HttpStatus.NOT_FOUND.getReasonPhrase();
+        return HttpStatus.BAD_REQUEST.getReasonPhrase();
     }
 }
