@@ -2,6 +2,8 @@
 
 <configuration scan="true" scanPeriod="60 seconds" debug="true">
     <property name="LOG_FILE" value="demo-log/demo.log" />
+    <property name="LOG_FILE_MAX_SIZE" value="5MB"/>
+    <property name="LOG_FILE_MAX_HISTORY" value="0"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -20,7 +22,7 @@
             <!-- 单个分片文件大小，默认是10M(压缩前) -->
             <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
             <!-- 日志保存的最大时间，默认是永久保存 -->
-            <maxHistory>${LOG_FILE_MAX_HISTORY:-0}</maxHistory>
+            <maxHistory> ${LOG_FILE_MAX_HISTORY:-0}</maxHistory>
         </rollingPolicy>
     </appender>
     <root level="INFO">
